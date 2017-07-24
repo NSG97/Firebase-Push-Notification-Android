@@ -21,8 +21,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /*Set Activity in PushNotificationService - Required to show toast on UI Thread.*/
         PushNotificationService.setActivity(this);
 
+        /*Get Token for firebase messaging.*/
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.i(TAG, "Token: "+refreshedToken);
 
@@ -31,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
         sButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*Subscribe to 'ALL' Notifications*/
                 FirebaseMessaging.getInstance().subscribeToTopic("ALL");
                 Toast.makeText(getBaseContext(),"Subscribed to Notifications.",Toast.LENGTH_SHORT).show();
             }
@@ -41,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         usButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                /*Unsubscribe to 'ALL' Notifications*/
                 FirebaseMessaging.getInstance().unsubscribeFromTopic("ALL");
                 Toast.makeText(getBaseContext(),"Unsubscribed to Notifications.",Toast.LENGTH_SHORT).show();
             }

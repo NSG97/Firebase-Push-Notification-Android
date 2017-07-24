@@ -15,6 +15,8 @@ import com.google.firebase.messaging.RemoteMessage;
 public class PushNotificationService extends FirebaseMessagingService {
 
     private static final String TAG = "FirebaseTAG";
+
+    /*Main Activity to show a toast*/
     private static Activity activity;
 
     public static void setActivity(Activity activity) {
@@ -27,6 +29,7 @@ public class PushNotificationService extends FirebaseMessagingService {
 
         Log.i(TAG, "onMessageReceived: "+message);
 
+        /*Run a toast on the UI Thread.*/
         activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
